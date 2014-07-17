@@ -1,0 +1,67 @@
+##############################################
+#
+#      Routing Protocol Vulnerabilities
+#  for Tenable Passive Vulnerablity Scanner
+#             By Duncan Alderson
+#                 @webantix
+#              Copyright 2014
+#
+##############################################
+
+###############      HSRP      ###############
+
+###Working do not edit
+id=20000
+udp
+sport=1985
+name=Cisco HSRP Default password 
+synopsis=The remote host is running Cisco's Hot Standby Routing Protocol with the default password set. This allows attacker's to join the HSRP group and either cause a denial of service attack or Man in the Middle all network traffic.
+description=does not work
+#using during development
+risk=CRITICAL 
+solution=Configure the Cisco HSRP device to use MD5 Authentication
+seealso=http://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/12-4/fhp-12-4-book/fhp-hsrp.html
+seealso=http://www.webantix.net/hsrp
+family=Generic
+# Binary match for HSRP authentication "cisco"
+bmatch=>44:636973636f
+#bmatch=>0:0128
+
+
+NEXT
+
+id=20001
+udp
+sport=1985
+name=Cisco HSRP low 'Priority' detection
+synopsis=The remote host is configured to be the Primary active router. The priority level has been configured to allow for other devices to join the HSRP group and take priority over the group. This could cause a denial of service or Man in the Middle attack.  
+description=does not work
+risk=CRITICAL
+solution=Configure the Cisco HSRP device to have the highest possible priority.
+seealso=http://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/12-4/fhp-12-4-book/fhp-hsrp.html
+seealso=http://www.webantix.net/hsrp
+family=Generic
+# HSRP State Active
+bmatch=>4:06
+# HSRP Priority NOT 255
+bmatch=>14:!000000FF
+pluginoutput=Priority 
+
+###Working do not edit above
+
+###############      VRRP      ###############
+
+
+###############      DTP       ###############
+
+
+###############      STP       ###############
+
+###############      VTP       ###############
+
+###############      CDP       ###############
+
+###############     802.1X     ###############
+
+
+###############     802.1Q     ###############
